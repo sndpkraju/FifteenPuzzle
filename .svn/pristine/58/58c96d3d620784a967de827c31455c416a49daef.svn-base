@@ -1,0 +1,162 @@
+package edu.wm.cs.cs301.slidingpuzzle;
+
+public class SimplePuzzleState implements PuzzleState {
+	private Operation operation;
+	private SimplePuzzleState parent;
+	private int[][] puzzle;
+	private int pathLength;
+	
+	public SimplePuzzleState() {
+		super();
+		this.parent = null;
+		this.operation = null;
+		this.puzzle = null;
+	}
+
+	@Override
+	public void setToInitialState(int dimension, int numberOfEmptySlots) {
+		// TODO Auto-generated method stub
+		puzzle = new int[dimension][dimension];
+		int n = 1;
+		for (int row = 0; row < dimension; row++){
+			for (int col = 0; col < dimension; col++) {
+				puzzle[row][col] = n;
+				n++;
+				if (row == dimension - 1 && col >= dimension - numberOfEmptySlots) {
+					puzzle[row][col] = 0;
+				}
+			}
+		}
+	}
+
+	@Override
+	public int getValue(int row, int column) {
+		// TODO Auto-generated method stub
+		if (row >= 0 && column >= 0 && row < puzzle.length && column < puzzle.length) {
+			return puzzle[row][column];
+		}
+		return 0;
+	}
+
+	@Override
+	public PuzzleState getParent() {
+		// TODO Auto-generated method stub
+		return parent;
+	}
+
+	@Override
+	public Operation getOperation() {
+		// TODO Auto-generated method stub
+		return operation;
+	}
+
+	@Override
+	public int getPathLength() {
+		// TODO Auto-generated method stub
+		return pathLength;
+	}
+
+	@Override
+	public PuzzleState move(int row, int column, Operation op) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+//moves tile right when called
+	private SimplePuzzleState moveTileRight(int row, int column, int n, SimplePuzzleState newState){
+		if (column + 1 < puzzle.length){
+			if (isEmpty(row, column + 1)){
+				int temp= newState.puzzle[row][column];
+				newState.puzzle[row][column] = 0;
+				newState.puzzle[row][column + 1] = temp;
+			}
+			else {
+				return null;
+			}
+			
+		}
+		else {
+			return null;
+		}
+		return newState;
+	}
+//moves tile left when called
+	private SimplePuzzleState moveTileLeft(int row, int column, int n, SimplePuzzleState newState){
+		if (column - 1 >= 0){
+			if (isEmpty(row, column - 1)){
+				int temp= newState.puzzle[row][column];
+				newState.puzzle[row][column] = 0;
+				newState.puzzle[row][column - 1] = temp;
+			}
+			else {
+				return null;
+			}
+			
+		}
+		else {
+			return null;
+		}
+		return newState;
+	}
+//moves tile up when called	
+	private SimplePuzzleState moveTileUp(int row, int column, int n, SimplePuzzleState newState){
+		if (row - 1 >= 0){
+			if (isEmpty(row - 1, column)){
+				int temp = newState.puzzle[row][column];
+				newState.puzzle[row][column] = 0;
+				newState.puzzle[row - 1][column] = temp;
+			}
+			else {
+				return null;
+			}
+			
+		}
+		else {
+			return null;
+		}
+		return newState;
+	}
+//moves tile down when called	
+	private SimplePuzzleState moveTileDown(int row, int column, int n, SimplePuzzleState newState){
+		if (row + 1 < puzzle.length){
+			if (isEmpty(row + 1, column)){
+				int temp = newState.puzzle[row][column];
+				newState.puzzle[row][column] = 0;
+				newState.puzzle[row + 1][column] = temp;
+			}
+			else {
+				return null;
+			}
+			
+		}
+		else {
+			return null;
+		}
+		return newState;
+	}
+	
+	
+	@Override
+	public PuzzleState drag(int startRow, int startColumn, int endRow, int endColumn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PuzzleState shuffleBoard(int pathLength) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isEmpty(int row, int column) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public PuzzleState getStateWithShortestPath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

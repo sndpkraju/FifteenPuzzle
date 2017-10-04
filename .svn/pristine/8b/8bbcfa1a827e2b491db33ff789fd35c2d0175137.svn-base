@@ -1,0 +1,89 @@
+package edu.wm.cs.cs301.slidingpuzzle;
+
+public class SimplePuzzleState implements PuzzleState {
+	private Operation operation;
+	private SimplePuzzleState parent;
+	private int[][] puzzle;
+	private int pathLength;
+	
+	public SimplePuzzleState() {
+		super();
+		this.parent = null;
+		this.operation = null;
+		this.puzzle = null;
+	}
+
+	@Override
+	public void setToInitialState(int dimension, int numberOfEmptySlots) {
+		// TODO Auto-generated method stub
+		puzzle = new int[dimension][dimension];
+		int n = 1;
+		for (int row = 0; row < dimension; row++){
+			for (int col = 0; col < dimension; col++) {
+				puzzle[row][col] = n;
+				n++;
+				if (row == dimension - 1 && col >= dimension - numberOfEmptySlots) {
+					puzzle[row][col] = 0;
+				}
+			}
+		}
+	}
+
+	@Override
+	public int getValue(int row, int column) {
+		// TODO Auto-generated method stub
+		if (row >= 0 && column >= 0 && row < puzzle.length && column < puzzle.length) {
+			return puzzle[row][column];
+		}
+		return 0;
+	}
+
+	@Override
+	public PuzzleState getParent() {
+		// TODO Auto-generated method stub
+		return parent;
+	}
+
+	@Override
+	public Operation getOperation() {
+		// TODO Auto-generated method stub
+		return operation;
+	}
+
+	@Override
+	public int getPathLength() {
+		// TODO Auto-generated method stub
+		return pathLength;
+	}
+
+	@Override
+	public PuzzleState move(int row, int column, Operation op) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PuzzleState drag(int startRow, int startColumn, int endRow, int endColumn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PuzzleState shuffleBoard(int pathLength) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isEmpty(int row, int column) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public PuzzleState getStateWithShortestPath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
